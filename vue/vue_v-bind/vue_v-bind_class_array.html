@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-bind_class_array</title>
+    <style>
+        .aaa{
+            color: deepskyblue;
+        }
+        .bbb{
+            font-size: xx-large;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <h4 :class="getC()">{{message}}</h4>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: "#app",
+        data: {
+            message: "hello",
+            class1: 'aaa',
+            class2: 'bbb'
+        },
+        methods: {
+            getC: function () {
+                return [this.class1, this.class2]
+            }
+        }
+    })
+</script>
+</body>
+</html>

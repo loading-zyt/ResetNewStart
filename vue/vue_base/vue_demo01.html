@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title>vue.js demo</title>
+
+    <script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<div id="app">
+    {{ message }}   <!-- Mustache语法 {{ xxx }} -->
+    <ul>
+        <li v-for="item in lists">{{item}}</li>
+    </ul>
+    <br/>
+    计数:{{counter}}
+    <!--    <button v-on:click="counter++">+</button>-->
+    <!--    <button v-on:click="counter&#45;&#45;">-</button>-->
+    <button v-on:click="add">+</button>
+    <button @click="sub">-</button>   <!-- @ 语法糖 -->
+</div>
+
+<script type="text/javascript">
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: 'hello vue.js',
+            lists: ['a', 'b', 'c', 'd'],
+            counter: 0
+        },
+        methods: {
+            add: function () {
+                this.counter++
+            },
+            sub: function () {
+                this.counter--
+            }
+        }
+    });
+</script>
+</body>
+</html>

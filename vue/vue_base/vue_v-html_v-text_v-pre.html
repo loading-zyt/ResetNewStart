@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-html,v-text,v-pre</title>
+</head>
+<body>
+<div id="app">
+    <h2>{{url}}</h2>
+    <h2 v-html="url"></h2>
+
+    <h3>{{message}} ,world</h3>             <!-- result: hello ,world-->
+    <h3 v-text="message"> ,world</h3>       <!-- result: hello-->
+
+    <h4 v-pre>{{message}}</h4>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: "#app",
+        data: {
+            message: "hello",
+            url:"<a href='http://www.google.jp/'>google</a>"
+        }
+    })
+</script>
+</body>
+</html>

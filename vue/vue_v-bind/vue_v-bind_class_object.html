@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-bind_class_object</title>
+    <style>
+        .class1 {
+            color: orangered;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <h2 v-bind:class="{class1:isClass1,class2:isClass2}">{{message}}</h2>
+    <h3 v-bind:class="setClasses()">{{message}}</h3>
+    <button v-on:click="colorChange">color</button>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: "#app",
+        data: {
+            message: "hello",
+            isClass1: true,
+            isClass2: true
+        },
+        methods: {
+            colorChange: function () {
+                this.isClass1 = !this.isClass1
+            },
+            setClasses: function () {
+                return {class1: this.isClass1, class2: this.isClass2}
+            }
+        }
+    })
+</script>
+</body>
+</html>
