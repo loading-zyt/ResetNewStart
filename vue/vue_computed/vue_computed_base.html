@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue_computed_base</title>
+</head>
+<body>
+<div id="app">
+    <h2>{{fullName}}</h2>
+    <h2>总价{{totalPrice}}</h2>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: "#app",
+        data: {
+            firstName: "hello",
+            lastName: "world",
+            books: [
+                {id: 101, name: "不朽", price: 120},
+                {id: 102, name: "数据建模", price: 143},
+                {id: 103, name: "深入浅出python", price: 176},
+                {id: 104, name: "西游记", price: 123},
+                {id: 105, name: "神雕侠侣", price: 109}
+            ]
+        },
+        computed: {
+            fullName: function () {
+                return this.firstName + ' ' + this.lastName
+            },
+            totalPrice: function () {
+                let result = 0
+                for (let book of this.books) {
+                    result += book.price
+                }
+                return result
+            }
+        }
+    })
+</script>
+</body>
+</html>
