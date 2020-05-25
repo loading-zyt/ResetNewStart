@@ -1,0 +1,80 @@
+<h1>👋 Hello World!</h1>
+<div id='app'>
+  {{message}}
+  <ul>
+    <li v-for="item in lists">{{item.ctn}}</li>
+  </ul>
+</div>
+<hr>
+
+<div id='imgApp'>
+  <a href="#" @click='prev' v-show='index!=0'>prev</a>
+  <img v-bind:src='imgArr[index]'/>
+  <a href="#" v-on:click='next' v-show='index<imgArr.length-1'>next</a>
+</div>
+
+<hr>
+
+<div id='todoApp'>
+  <header>
+    <h1>Todo List</h1>
+    <input v-model='inputValue' v-on:keyup.enter='add' autofocus='autofocus' autocomplete='off' placeholder='Please input todo item' class='new-todo'>
+  </header>
+  <section class='main'>
+    <ul class='todo-list'>
+      <li class='todo' v-for='(item,index) in lists'>
+        <div class='view'>
+          <span class='index'>{{index+1}}.</span>
+          <label>{{item}}</label>
+          <button class='destory' @click='del(index)'>x</button>
+        </div>
+      </li>
+    </ul>
+  </section>
+  
+  <footer class='footer' v-show='lists.length!=0'>
+    <span class='foot-count'><strong>{{lists.length}}</strong> items left</span>
+    <button class='clear-completed' @click='clear'>
+      Clear
+    </button>
+  </footer>
+</div>
+
+<hr>
+
+<div id='axiosApp'>
+  <input type="button" value='get' class='get'>
+  <input type="button" value='post' class='post'>
+  <input type="button" value='getJoke' @click='getJoke'>
+  <p>{{joke}}</p>
+</div>
+
+<hr>
+
+<div class='wrap' id='weatherApp'>
+  <div class='search_form'>
+    <div class='logo'></div>
+    <div class='form_group'>
+      <input type="text" v-on:keyup.enter='searchWeather' v-model='city' class='inputTxt' placeholder='Please input the city' />
+      <button class='inputSubmit' @click='searchWeather'>
+        Search
+      </button>
+    </div>
+    <div class='hotKey'>
+      <a href="javascript:;" @click=changeCity('北京')>北京</a>
+      <a href="javascript:;" @click=changeCity('上海')>上海</a>
+      <a href="javascript:;" @click=changeCity('西安')>西安</a>
+    </div>
+  </div>
+  <ul class='weather_list'>
+    <li v-for='item in weatherList'>
+      <div class='info_type'><span class='iconfont'>{{item.type}}</span></div>
+      <div class=info_temp>
+        <b>{{item.low}}</b>
+        ~
+        <b>{{item.high}}</b>
+      </div>
+      <div class='info_date'><span>{{item.date}}</span></div>
+    </li>
+  </ul>
+</div>
