@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>vue_conditions</title>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<h1 v-if="awesome">oh yeah!</h1>
+		<h1 v-else>Oh no...</h1>
+		<template v-if="ok">
+			<h2>Title</h2>
+			<p>paragraph 1</p>
+			<p>paragraph 2</p>
+		</template>
+	</div>
+	<script>
+		var app=new Vue({
+		    el:'#app',
+		    data:{
+		        awesome:true,
+		        ok:true
+		    }
+		});
+	</script>
+</body>
+</html>

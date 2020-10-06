@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>vue_class&style</title>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<div class="static"  v-bind:class="{active:isActive,'text-danger':hasError}"></div>
+		<div :class="classObj"></div>
+		<div :class="classObj2"></div>
+		<div :class="[activeClass,errorClass]"></div>
+		<div v-bind:style="{color:activeColor,fontSize:fontSize+'px'}">ああ</div>
+		<div :style="styleObj">うう</div>
+	</div>
+	<script>
+		var app = new Vue({
+		    el:'#app',
+		    data:{
+		        isActive:true,
+		        hasError:true,
+		        classObj:{
+		            class1:true,
+		            class2:true
+		        },
+		        activeClass:'active',
+		        errorClass:'text-danger',
+		        activeColor:'red',
+		        fontSize:30,
+		        styleObj:{
+		            color:'green',
+		            fontSize:'15px'
+		        }
+		    },
+		    computed:{
+		        classObj2:function(){
+		            return {
+		                active:this.isActive && !this.error, 'text-danger':this.error && this.error.type==='fatal'
+		            }
+		        }
+		    }
+		});
+	</script>
+
+</body>
+</html>
