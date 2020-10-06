@@ -8,7 +8,7 @@
 <body>
 	<div id="app">
 		<ol>
-			<todo-item
+			<todo-item class="myClass2"
 				v-for="item in groceryList"
 				v-bind:todo="item"
 				v-bind:key="item.id"></todo-item>
@@ -17,7 +17,7 @@
 	<script>
 		Vue.component('todo-item',{
 		   props:['todo'],
-		   template:'<li>{{todo.text}}</li>'
+		   template:'<li class="myClass">{{todo.text}}</li>'
 		});
 		var app = new Vue({
 		   el:'#app',
