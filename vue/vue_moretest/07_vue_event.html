@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<title>vue_event</title>
+</head>
+<body>
+	<!-- 绑定表达式 -->
+	<div id="exp1">
+		<button v-on:click="counter += 1">
+			Add 1
+		</button>
+		<p>the button has been clicked {{counter}} times.</p>
+	</div>
+	<hr/>
+	<!-- 绑定方法 -->
+	<div id="exp2">
+		<button @click="greet">
+			Greet
+		</button>
+	</div>
+	<hr/>
+	<!-- 内联 JavaScript 中调用方法 -->
+	<div id="exp3">
+		<button v-on:click="say('hi')">say hi</button>
+		<button v-on:click="say('what')">say what</button>
+		<button v-on:click="warn('warning',$event)">warning</button>
+	</div>
+	<hr/>
+	<!-- 按键修饰符 -->
+	<div id="exp4">
+		enterFun:<input v-on:keyup.enter="enterFun">
+		pageDownFun:<input v-on:keyup.page-down="pageDownFun">
+	</div>
+	<script>
+		var exp1 = new Vue({
+		    el:"#exp1",
+		    data:{
+		        counter:0
+		    }
+		});
+		
+		var exp2 = new Vue({
+		    el:"#exp2",
+		    data:{
+		        name:'xiaowang'
+		    },
+		    methods:{
+		        greet:function(event){
+		            alert('hello '+this.name+'!');
+		            if(event){
+		                alert(event.target.tagName);
+		            }
+		        }
+		    }
+		});
+		
+		var exp3 = new Vue({
+		    el:"#exp3",
+		    methods:{
+		        say:function(msg){
+		            alert(msg);
+		        },
+		        warn:function(msg,e){
+		            if(e){
+		                console.log(e);
+		                e.preventDefault();
+		            }
+		            alert(msg);
+		        }
+		    }
+		});
+		
+		var exp4 = new Vue({
+		    el:"#exp4",
+		    methods:{
+		        enterFun:function(){
+		            alert('enter!!');
+		        },
+		        pageDownFun:function(){
+		            alert('pageDown!!');
+		        }
+		    }
+		});
+		/*
+			事件修饰符
+			修饰符可以串联(v-on:click.stop.prevent)
+			使用修饰符时、相应的代码会以同样的顺序产生（v-on:click.prevent.self 会阻止所有的点击，而 v-on:click.self.prevent 只会阻止对元素自身的点击。）
+			.stop			阻止单击事件继续传播
+			.prevent		提交事件不再重载页面
+			.capture		添加事件监听器时使用事件捕获模式（即内部元素触发的事件先在此处理，然后才交由内部元素进行处理）
+			.self				只当在 event.target 是当前元素自身时触发处理函数（即事件不是从内部元素触发的）
+			.once			点击事件将只会触发一次
+			.passive		滚动事件的默认行为 (即滚动行为) 将会立即触发、而不会等待 `onScroll` 完成（这其中包含 `event.preventDefault()` 的情况）
+		*/
+	</script>
+</body>
+</html>
