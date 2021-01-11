@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<title>vue_form</title>
+</head>
+<body>
+	<div id="exp1">
+		<!-- 文本 -->
+		<input v-model.trim="message" placeholder="edit me">
+		<!-- <input v-model.lazy="message" placeholder="edit me"> change 事件_之后_进行同步-->
+		<p> edited message is :{{message}}</p>
+		
+		<input v-model.number="age" type="number">
+		<p> age is :{{age}}</p>
+		<hr>
+		
+		<!-- 多行文本 -->
+		<span>multiline message is :</span>
+		<p style="white-space:pre-line;">{{multiMessage}}</p>
+		<br>
+		<textarea v-model="multiMessage" placeholder=""></textarea>
+		<hr>
+		
+		<!-- 复选框 -->
+		<input type="checkbox" id="checkbox" v-model="checked">
+		<label for="checkbox">{{checked}}</label>
+		<br>
+		
+		<input type="checkbox" id="wang" value="wang" v-model="checkedNames">
+		<label for="wang">wang</label>
+		<input type="checkbox" id="cai" value="cai" v-model="checkedNames">
+		<label for="cai">cai</label>
+		<input type="checkbox" id="zhao" value="zhao" v-model="checkedNames">
+		<label for="zhao">zhao</label>
+		<br>
+		<span>checked names: {{checkedNames}}</span>
+		<hr>
+		
+		<!-- 单选按钮 -->
+		<input type="radio" id="one" value="one" v-model="picked">
+		<label fro="one">One</label>
+		<br>
+		<input type="radio" id="two" value="two" v-model="picked">
+		<label fro="two">Two</label>
+		<br>
+		<span>picked: {{picked}}</span>
+		<hr>
+		
+		<!-- 选择框 -->
+		<select v-model="selected">
+			<option disabled value="">please select</option>
+			<option>A</option>
+			<option>B</option>
+			<option>C</option>
+		</select>
+		<span>selected: {{selected}}</span>
+		<br>
+		
+		<select v-model="multiSelected" multiple style="width:50px">
+			<option>A</option>
+			<option>B</option>
+			<option>C</option>
+		</select>
+		<span>multiSelected: {{multiSelected}}</span>
+		<br>
+		
+		<!-- v-for 动态渲染选项 -->
+		<select v-model="selected2">
+			<option v-for="option in options" v-bind:value="option.value">
+				{{option.text}}
+			</option>
+		</select>
+		<span>selected: {{selected2}}</span>
+		<hr>
+		<!-- 值绑定-复选框 -->
+		<input type="checkbox" v-model="toggle" true-value="yes01" false-value="no01">
+		<br>
+		<!-- 值绑定-单选按钮 -->
+		<input type="radio" v-model="pick" v-bind:value='a'>
+	</div>
+	
+	<script>
+		var exp1 = new Vue({
+		    el:"#exp1",
+		    data:{
+		        message:'',
+		        multiMessage:'',
+		        checked:false,
+		        checkedNames:[],
+		        picked:'',
+		        selected:'',
+		        multiSelected:[],
+		        options:[
+		            {text:'one',value:'A'},
+		            {text:'two',value:'B'},
+		            {text:'three',value:'C'},
+		            {text:'four',value:'D'},
+		        ],
+		        selected2:'B',
+		        toggle:false,
+		        pick:'',
+		        a:'',
+		        age:0
+		    }
+		});
+	</script>
+</body>
+</html>

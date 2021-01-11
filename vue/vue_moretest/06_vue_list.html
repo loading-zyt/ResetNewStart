@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>vue_list</title>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+	<!-- 尽可能在使用 v-for 时提供 key attribute,从而重用和重新排序现有元素 -->
+	<ul id='exp1'>
+		<li v-for="item in items"  :key="item.message">
+			{{item.message}}
+		</li>
+	</ul>
+	<hr/>
+	<ul id='exp2'>
+		<li v-for="(item,index) in items" >
+			{{parentMessage}}-{{index}}-{{item.message}}
+		</li>
+	</ul>
+	<hr/>
+	<!-- 遍历一个对象的 property,第二个的参数为 property 名称 (也就是键名) -->
+	<ul id="v-for-object" class="demo">
+		<li v-for="(value,name) in object">
+			{{name}}:{{value}}
+		</li>
+	</ul>
+	<hr/>
+	<!-- 用第三个参数作为索引 -->
+	<div id ="test" >
+		<div v-for="(value,name,index) in object">
+				{{index}},{{name}},{{value}}
+		</div>
+	</div>
+	<hr/>
+	<!-- 数组更新检测 -->
+	<ul id="arrayTest">
+		<li v-for="arr in arrs" :key=arr.id>
+			{{arr.msg}}
+		</li>
+	</ul>
+	<hr/>
+	<!-- 显示过滤/排序后的结果 -->
+	<ul id="filterArr">
+		<li v-for="n in evenNumbers">{{n}}</li>
+	</ul>
+	<hr/>
+	<div id="forValue">
+	  <span v-for="n in 10">{{ n }} </span>
+	</div>
+	<hr/>
+	<ul id="forTemplate">
+	  <template v-for="item in items">
+	    <li>{{ item.msg }}</li>
+	    <li class="divider" role="presentation">-----</li>
+	  </template>
+	</ul>
+	<script>
+		var exp1 = new Vue({
+		    el:'#exp1',
+		    data:{
+		        items:[
+		            {message:'foo'},
+		            {message:'bar'}
+		        ]
+		    }
+		});
+		
+		var exp2 = new Vue({
+		    el:'#exp2',
+		    data:{
+		        parentMessage:'Parent',
+		        items:[
+		            {message:'foo'},
+		            {message:'bar'}
+		        ]
+		    }
+		});
+		
+		new Vue({
+		    el:"#v-for-object",
+		    data:{
+		        object:{
+		            title:'How to do ...',
+		            author:'xiao wang',
+		            publishedAt:'2020-10-09'
+		        }
+		    }
+		});
+		
+		new Vue({
+		    el:"#test",
+		    data:{
+		        object:{
+		            title:'How to do ...',
+		            author:'xiao wang',
+		            publishedAt:'2020-10-09'
+		        }
+		    }
+		});
+		
+		var arrTest = new Vue({
+		    el:"#arrayTest",
+		    data:{
+		        arrs:[
+		            {id:1,msg:'A'},
+		            {id:2,msg:'B'},
+		            {id:3,msg:'C'},
+		            {id:4,msg:'D'},
+		            {id:5,msg:'E'}
+		        ]
+		    }
+		});
+		
+		new Vue({
+		    el:"#filterArr",
+		    data:{
+		        numbers:[1,2,3,4,5,6]
+		    },
+		    computed:{
+		        evenNumbers:function(){
+		            return this.numbers.filter(function(number){
+		                return number %2===0
+		            })
+		        }
+		    }
+		});
+		
+		new Vue({
+		   el:"#forValue",
+		   data:{
+		       
+		   }
+		});
+		
+		new Vue({
+			   el:"#forTemplate",
+			   data:{
+			       items:[
+			           {msg:'hello'},
+			           {msg:'hola'},
+			           {msg:'こんにちは'}
+			       ]
+			   }
+			});
+		/*
+		push({id:6,msg:'F'})	最后追加新元素，返回数组长度
+		pop()		去除最后一个元素，并返回该元素
+		shift()		去除第一个元素，并返回该元素
+		unshift()	最前面追加新元素，返回数组长度
+		splice(index,deleteItemCount,addItems)	向/从数组中添加/删除项目，然后返回被删除的项目。
+			original:A,B,C,D,E
+			arrTest.arrs.splice(1,0,{id:6,msg:'F'});　⇒　A,F,B,C,D,E　　return:木有
+			arrTest.arrs.splice(1,1,{id:7,msg:'G'});　⇒　A,G,B,C,D,E　　return:　id:6,msg:'F'
+			arrTest.arrs.splice(1,2,{id:8,msg:'H'},{id:9,msg:'I'});　⇒　A,H,I,C,D,E　　return:　id:7,msg:'G' & id:2,msg:'B'
+			arrTest.arrs.splice(1,2,{id:99,msg:'Z'});　⇒　A,Z,C,D,E		return:　id:8,msg:'H' & id:9,msg:'I'
+		sort()  排序
+		reverse()	元素反转
+		*/
+	</script>
+</body>
+</html>
