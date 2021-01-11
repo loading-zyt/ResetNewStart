@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>class</title>
+</head>
+<body>
+
+<script type="text/javascript">
+    class Person {
+        // 构造器
+        constructor(name, age) {
+            // this:类的实例对象
+            this.name = name;
+            this.age = age;
+        }
+
+        speak() {
+            console.log('我是' + this.name + ',我' + this.age + '岁')
+        }
+    }
+
+    class Student extends Person {
+        constructor(name, age, grade) {
+            super(name, age);
+            this.grade = grade;
+
+        }
+        study(){
+            console.log('我学习')
+        }
+    }
+
+    // const p1 = new Person('Tom', 18);
+    // const p2 = new Person('Jerry', 17)
+    // console.log(p1)
+    // console.log(p2)
+    // p1.speak()
+    // p2.speak()
+
+    const s1 = new Student('小白', 18, '高三')
+    console.log(s1)
+    s1.study()
+</script>
+</body>
+</html>
