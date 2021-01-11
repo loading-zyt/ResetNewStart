@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jquery-3.5.1.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            float: left;
+            list-style-type: none;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<ul id="comm">
+    <li>☆</li>
+    <li>☆</li>
+    <li>☆</li>
+    <li>☆</li>
+    <li>☆</li>
+</ul>
+
+<script>
+    $(function () {
+
+        let star = '☆';
+        let stared = '★';
+
+        $('#comm>li').on('mouseenter', function () {
+            $(this).text(stared).prevAll().text(stared);
+            $(this).nextAll().text(star);
+        }).on('mouseleave', function () {
+            $('#comm>li').text(star);
+            $('#comm>li[clickCurrent]').text(stared).prevAll().text(stared);
+        }).on('click', function () {
+            $(this).attr('clickCurrent', 'current').siblings().removeAttr('clickCurrent');
+        });
+    });
+</script>
+
+</body>
+</html>

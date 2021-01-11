@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <input type="text" name="username" id="" v-model="username" value="">
+    <p>{{username}}</p>
+
+    <span v-for="item in fruits">
+        {{item}}
+        <input type="checkbox" name="fruits" :value="item" v-model="checkedFruit">
+    </span>
+    {{checkedFruit}}
+
+    <span v-for="item in fruits">
+        {{item}}
+        <input type="radio" name="likeFruits" :value="item" v-model="likeFruit">
+    </span>
+    {{likeFruit}}
+
+    <h1>city</h1>
+    <select v-model="chooseCity">
+        <option v-for="item in cities" :value="item">{{item}}</option>
+    </select>
+    <h2>{{chooseCity}}</h2>
+
+    <h1>moreCity</h1>
+    <select v-model="moreCity" multiple="multiple">
+        <option v-for="item in cities" :value="item">{{item}}</option>
+    </select>
+    <h2>{{moreCity}}</h2>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: "#app",
+        data: {
+            username: "hello",
+            fruits:['apple','banana','orange'],
+            checkedFruit:[],
+            likeFruit:"",
+            cities:["beijing","shanghai","shenzhen"],
+            chooseCity:"aaa",
+            moreCity:[]
+        }
+    })
+</script>
+
+</body>
+</html>

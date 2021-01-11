@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ToDoList</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/vue.js"></script>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div id="app" class="container-fluid" style="background-color:lavender;">
+    <div class="row" style="background-color:cadetblue;">
+        <div class="col-2">
+            <img src="https://static.runoob.com/images/mix/paris.jpg" class="img-fluid rounded-circle">
+        </div>
+        <div class="col-8">
+            <input type="text" class="form-control" id="inputTodo" v-model="inputValue" @keydown.enter="enterTodo"
+                   placeholder="请输入待办事项"/>
+        </div>
+        <div class="col-2">
+            <span class="badge badge-primary" @click="enterTodo">追加</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h4><span class="title">正在进行<span class="badge badge-warning">{{doingCount}}</span></span></h4>
+        </div>
+    </div>
+    <div class="row" v-for="(item,index) in doingList" style="background-color:lightskyblue;" :key="'doing'+index">
+        <div class="col-1">
+            <input type="checkbox" @click.prevent="finishedTodo(item.id)"/>
+        </div>
+        <div class="col-9">
+            {{item.content}}
+        </div>
+        <div class="col-2">
+            <span class="badge badge-danger" @click="deleteItem(item.id)">删除</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h4><span class="title">已完成</span><span class="badge badge-warning">{{doneCount}}</span></h4>
+        </div>
+    </div>
+    <div class="row" v-for="(item,index) in doneList" style="background-color:lightslategray;" :key="'done'+index">
+        <div class="col-1">
+            <input type="checkbox" @click.prevent="finishedTodo(item.id)" checked="item.isDone"/>
+        </div>
+        <div class="col-9">
+            {{item.content}}
+        </div>
+        <div class="col-2">
+            <span class="badge badge-danger" @click="deleteItem(item.id)">删除</span>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    const app = new Vue({
+        el: "#app",
+        data: {
+            todoList: [],
+            inputValue: ""
+        },
+        computed: {
+            // 待办事项
+            doingList: function () {
+                let arr = this.todoList.filter(function (item, index) {
+                    return !item.isDone
+                });
+                return arr;
+            },
+            // 完成事项
+            doneList: function () {
+                let arr = this.todoList.filter(function (item, index) {
+                    return item.isDone
+                });
+                return arr;
+            },
+            doingCount: function () {
+                return this.doingList.length;
+            },
+            doneCount: function () {
+                return this.doneList.length;
+            }
+        },
+        methods: {
+            enterTodo: function (e) {
+                if (this.inputValue == "") {
+                    return
+                }
+                this.todoList.push({
+                    content: this.inputValue,
+                    isDone: false,
+                    id: this.todoList.length
+                });
+                this.saveDataLocal();
+                //清空输入框内容
+                this.inputValue = "";
+            },
+            saveDataLocal: function () {
+                localStorage.todoList = JSON.stringify(this.todoList)
+            },
+            finishedTodo: function (id) {
+                this.todoList[id].isDone = !this.todoList[id].isDone;
+                this.saveDataLocal();
+            },
+            deleteItem: function (id) {
+                this.todoList.splice(id, 1);
+                this.todoList.forEach((item, i) => {
+                    item.id = i;
+                });
+                this.saveDataLocal();
+            }
+        },
+        mounted: function () {
+            this.todoList = localStorage.todoList ? JSON.parse(localStorage.todoList) : [];
+        }
+    })
+</script>
+</body>
+</html>

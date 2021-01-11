@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>突出显示</title>
+    <script src="jquery-3.5.1.js"></script>
+</head>
+<style type="text/css">
+    body{
+        background-color: black;
+    }
+    .wrap{
+        margin: 100px auto 0;
+        border: white solid 2px;
+        width: 640px;
+        height: 440px;
+        overflow: hidden;
+    }
+    ul{
+        margin-left: -40px;
+        margin-top: 10px;
+    }
+    li{
+        float: left;
+        margin-left: 10px;
+        margin-top: 5px;
+        list-style-type:none;
+    }
+</style>
+<body>
+<div class="wrap">
+    <ul>
+        <li><a href="#"><img src="image/伊布.jpg" height="200" width="200"/></a></li>
+        <li><a href="#"><img src="image/可达鸭.jpg" height="200" width="200"/></a></li>
+        <li><a href="#"><img src="image/杰尼龟.jpg" height="200" width="200"/></a></li>
+        <li><a href="#"><img src="image/波克比.jpg" height="200" width="200"/></a></li>
+        <li><a href="#"><img src="image/胖丁.jpg" height="200" width="200"/></a></li>
+        <li><a href="#"><img src="image/妙蛙种子.jpeg" height="200" width="200"/></a></li>
+    </ul>
+</div>
+
+<script>
+$(function () {
+    $('.wrap').find('li').mouseenter(function () {
+        $(this).css('opacity',1).siblings('li').css('opacity',0.4);
+    });
+
+    $('.wrap').mouseleave(function () {
+        $(this).find('li').css('opacity',1);
+    });
+});
+</script>
+</body>
+</html>

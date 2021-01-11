@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表格</title>
+    <script src="jquery-3.5.1.js"></script>
+    <style type="text/css">
+        #formAdd, #mask {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<button id="addContent">添加内容</button>
+<div>
+    <table>
+        <thead>
+        <tr>
+            <th>编号</th>
+            <th>姓名</th>
+            <th>年龄</th>
+        </tr>
+        </thead>
+        <tbody id="dataGrid">
+
+        </tbody>
+    </table>
+
+    <div id="mask" class="mask"></div>
+
+    <div id="formAdd" class="form-add">
+        <div class="form-add-title">
+            <span>添加数据</span>
+            <div id="hideFormAdd">x</div>
+        </div>
+        <div class="form-item">
+            <label class="lb" for="txtName">名字</label>
+            <input type="text" class="txt" id="txtName" placeholder="请输入名字">
+        </div>
+        <div class="form-item">
+            <label class="lb" for="txtAge">年龄</label>
+            <input type="text" class="txt" id="txtAge" value="16">
+        </div>
+        <div class="form-submit">
+            <input type="button" value="添加" id="addBtn">
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $(function () {
+        let data = [
+            {
+                no: '1',
+                name: '小白',
+                age: 16
+            },
+            {
+                no: '2',
+                name: '笨蛋',
+                age: 14
+            },
+            {
+                no: '3',
+                name: '虎子',
+                age: 15
+            },
+            {
+                no: '4',
+                name: '刚刚',
+                age: 18
+            }
+        ];
+
+        let list = [];
+        for (let j = 0; j < data.length; j++) {
+            list.push('<tr>');
+            for (let k in data[j]) {
+                list.push('<td>');
+                list.push(data[j][k]);
+                list.push('</td>');
+            }
+            list.push('<td>');
+            list.push('<a href="#">del</a>')
+            list.push('</td>');
+            list.push('</tr>');
+        }
+        //console.log(list.join(""));
+        $('#dataGrid').html(list.join(""));
+
+        $('#delContent').click(function () {
+            $('#dataGrid').empty();
+        });
+
+        $('a').click(function () {
+            $(this).parent().parent().remove();
+        });
+
+        $('#addContent').click(function () {
+            $('#formAdd').show();
+            $('#mask').show();
+        });
+
+        $('#hideFormAdd').click(function () {
+            $('#formAdd').hide();
+            $('#mask').hide();
+        });
+
+        $('#addBtn').click(function () {
+            let inputName = $('#txtName').val();
+            let inputAge = $('#txtAge').val();
+            let no = data.length + 1;
+
+            let $tr = $('<tr><td>' + no + '</td><td>' + inputName + '</td><td>' + inputAge + '</td><td><a href="#">del</a></td></tr>');
+            $('#dataGrid').append($tr);
+
+            let newData = {
+                no: String(no),
+                name: String(inputName),
+                age: inputAge
+            };
+            data.push(newData);
+
+            $('a').click(function () {
+                $(this).parent().parent().remove();
+            });
+
+            $('#hideFormAdd').click();
+        });
+    });
+</script>
+</body>
+</html>

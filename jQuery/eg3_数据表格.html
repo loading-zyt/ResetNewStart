@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表格</title>
+    <script src="jquery-3.5.1.js"></script>
+</head>
+<body>
+<button id="dataBtn">获取数据</button>
+<div>
+    <table>
+        <thead>
+        <tr>
+            <th>编号</th>
+            <th>姓名</th>
+            <th>年龄</th>
+        </tr>
+        </thead>
+        <tbody id="dataGrid">
+
+        </tbody>
+    </table>
+</div>
+
+<script>
+
+    $(function () {
+        let data = [
+            {
+                no: '001',
+                name: '小白',
+                age: 16
+            },
+            {
+                no: '002',
+                name: '笨蛋',
+                age: 14
+            },
+            {
+                no: '003',
+                name: '虎子',
+                age: 15
+            }
+        ];
+
+        // let list = [];
+        // for (let j = 0; j < data.length; j++) {
+        //     list.push('<tr>');
+        //     for (let k in data[j]) {
+        //         list.push('<td>');
+        //         list.push(data[j][k]);
+        //         list.push('</td>');
+        //     }
+        //     list.push('</tr>');
+        // }
+        // //console.log(list.join(""));
+        // $('#dataGrid').html(list.join(""));
+
+        let $btn = $('#dataBtn').click(function () {
+            for (let i = 0; i < data.length; i++) {
+                let $tr = $('<tr><td>' + data[i]['no'] + '</td><td>' + data[i]['name'] + '</td><td>' + data[i]['age'] + '</td></tr>');
+                $('#dataGrid').append($tr);
+            }
+        });
+
+    });
+</script>
+</body>
+</html>

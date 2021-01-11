@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表格全选反选</title>
+    <script src="jquery-3.5.1.js"></script>
+</head>
+<body>
+<div>
+    <table>
+        <thead>
+        <tr>
+            <th><input type="checkbox" id="checkAll"></th>
+            <th>编号</th>
+            <th>姓名</th>
+            <th>年龄</th>
+        </tr>
+        </thead>
+        <tbody id="dataGrid">
+
+        </tbody>
+    </table>
+</div>
+
+<script>
+
+    $(function () {
+        let data = [
+            {
+                no: '1',
+                name: '小白',
+                age: 16
+            },
+            {
+                no: '2',
+                name: '笨蛋',
+                age: 14
+            },
+            {
+                no: '3',
+                name: '虎子',
+                age: 15
+            },
+            {
+                no: '4',
+                name: '刚刚',
+                age: 18
+            }
+        ];
+
+        let list = [];
+        for (let j = 0; j < data.length; j++) {
+            list.push('<tr>');
+            list.push('<td>');
+            list.push('<input type="checkbox">')
+            list.push('</td>');
+            for (let k in data[j]) {
+                list.push('<td>');
+                list.push(data[j][k]);
+                list.push('</td>');
+            }
+            list.push('<td>');
+            list.push('<a href="#">del</a>')
+            list.push('</td>');
+            list.push('</tr>');
+        }
+        //console.log(list.join(""));
+        $('#dataGrid').html(list.join(""));
+
+        $('#delContent').click(function () {
+            $('#dataGrid').empty();
+        });
+
+        $('a').click(function () {
+            $(this).parent().parent().remove();
+        });
+
+        $('#checkAll').click(function () {
+            let checkAllVal = $(this).prop('checked');
+            // console.log(checkAllVal);
+            $('#dataGrid input').prop('checked', checkAllVal);
+        });
+
+        $('#dataGrid input').click(function () {
+            let numOfCheckbox = $('#dataGrid input').length;
+            let numOfSelected = $('#dataGrid input:checked').length;
+            // if (numOfSelected == numOfCheckbox) {
+            //     $('#checkAll').prop('checked', true);
+            // } else {
+            //     $('#checkAll').prop('checked', false);
+            // }
+            $('#checkAll').prop('checked', numOfSelected == numOfCheckbox);
+        });
+    });
+</script>
+</body>
+</html>

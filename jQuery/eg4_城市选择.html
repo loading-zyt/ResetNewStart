@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>城市选择</title>
+    <script src="jquery-3.5.1.js"></script>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #wrap {
+            margin: 100px auto 0;
+        }
+
+        select {
+            width: 100px;
+            height: 150px;
+            float: left;
+        }
+
+        #btnBox {
+            float: left;
+            display: block;
+            width: 25px;
+            text-align: center;
+        }
+
+        button {
+
+        }
+    </style>
+</head>
+<body>
+<div id="wrap">
+    <select name="src_city" id="src_city" multiple>
+        <option value="1">北京</option>
+        <option value="2">上海</option>
+        <option value="3">杭州</option>
+        <option value="4">成都</option>
+        <option value="5">深圳</option>
+    </select>
+
+    <div id="btnBox">
+        <button id="selectAll">&gt;&gt;</button>
+        <button id="selectNone">&lt;&lt;</button>
+        <button id="select">&gt;</button>
+        <button id="cancel">&lt;</button>
+    </div>
+
+    <select name="target_city" id="target_city" multiple></select>
+
+</div>
+
+<script>
+    $(function () {
+        $('#selectAll').click(function () {
+            $('#src_city>option').appendTo($('#target_city'));
+        });
+        $('#selectNone').click(function () {
+            $('#target_city>option').appendTo($('#src_city'));
+        });
+        $('#select').click(function () {
+            $('#src_city>option:selected').appendTo($('#target_city'));
+        });
+        $('#cancel').click(function () {
+            $('#target_city>option:selected').appendTo($('#src_city'));
+        });
+    });
+</script>
+</body>
+</html>
