@@ -29,8 +29,15 @@
    1. 继承React.Component
    2. 类名即组件名
    3. 调用render()
+   4. 渲染页面 -- ReactDOM.render(<组件名/>, 容器)
 
 #### 组件实例三大属性
 1. state
+   * 值是可包含多个key-value的对象
+   * 通过更新state重新渲染页面
+   * 组件render方法中的this为组件的实例对象
+   * 组件自定义方法(xxx)中的this为undefined，解决方法:
+      1. 通过函数对象的bind()强制绑定this--this.xxx = this.xxx.bind(this)
+      2. 使用箭头函数--xxx = () => {}
 2. props
 3. ref

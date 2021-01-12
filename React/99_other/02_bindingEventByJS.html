@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>event_bind</title>
+</head>
+<body>
+<button id="b1">btn1</button>
+<button id="b2">btn2</button>
+<button onclick="demo()">btn3</button>
+
+<script type="text/javascript">
+    const btn1 = document.getElementById('b1')
+    btn1.addEventListener('click', () => {
+        alert('btn1_click')
+    })
+
+    const btn2 = document.getElementById('b2')
+    btn2.onclick=()=>{
+        alert('btn2_click')
+    }
+    
+    function demo() {
+        alert('btn3_click')
+    }
+</script>
+</body>
+</html>
