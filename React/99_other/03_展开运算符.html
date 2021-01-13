@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>展开运算符</title>
+</head>
+<body>
+<script type="text/javascript">
+    let arr1 = [1, 3, 5, 7, 9]
+    let arr2 = [2, 4, 6, 8, 10]
+    console.log(...arr1)
+    let arr3 = [...arr1, ...arr2]
+    console.log(...arr3)
+
+    function sum1(...num) {
+        return num.reduce((preValue, currentValue) => {
+            return preValue + currentValue
+        })
+    }
+
+    console.log(sum1(1, 2, 3, 4))
+
+    let per = {name: 'Mary', age: 18}
+    let per2 = {...per}
+    per.age = 15
+    let per3={...per,name:'Jack',Address:'earth'}
+
+    console.log(per)
+    console.log(per2)
+    console.log(per3)
+</script>
+</body>
+</html>

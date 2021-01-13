@@ -2,9 +2,11 @@
 * ES6 --> ES5
 * jsx --> js
 ### react.development.js
-* 核心包
+* 核心包--React
 ### react-dom.development.js
-* 扩展
+* 扩展--ReactDom
+### prop-types.js
+* 用于对组件标签属性进行限制--PropTypes
 
 ### 虚拟DOM
 1. 是一个OBJECT对象
@@ -40,4 +42,13 @@
       1. 通过函数对象的bind()强制绑定this--this.xxx = this.xxx.bind(this)
       2. 使用箭头函数--xxx = () => {}
 2. props
+   * 每个组件都有props属性
+   * 组件标签的所有属性都保存在props中
+   * 组件内部不能修改props数据，作用是从外部向组件内传递变化的数据
+   * v15.5开始，PropsTypes单独封装为一个库，不在React里了
+   * 通过{...xxx}将对象的所有属性通过props传递
 3. ref
+
+#### React构造函数作用：
+1. 通过给this.state赋值对象来初始化内部state
+2. 为事件处理函数绑定实例
