@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>受控组件</title>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+</head>
+<body>
+<div id="test"></div>
+<script type="text/babel">
+    class Login extends React.Component {
+
+        state = {
+            username: '',
+            password: ''
+        }
+
+        render() {
+            return (
+                <form onSubmit={this.handleSubmit}>
+                    <input onChange={this.saveUsername} type="text" placeholder="username" name="username"/><br/>
+                    <input onChange={this.savePassword} type="password" placeholder="password" name="password"/><br/>
+                    <button>Login</button>
+                </form>
+            )
+        }
+
+        handleSubmit = (event) => {
+            event.preventDefault()
+            const {username, password} = this.state
+            alert(username + ' ' + password)
+        }
+
+        saveUsername = (event) => {
+            this.setState({username: event.target.value})
+        }
+
+        savePassword = (event) => {
+            this.setState({password: event.target.value})
+        }
+
+    }
+
+    ReactDOM.render(<Login/>, document.getElementById('test'))
+</script>
+</body>
+</html>

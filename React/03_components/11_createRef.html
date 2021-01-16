@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>createRef</title>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+</head>
+<body>
+<div id="test"></div>
+<script type="text/babel">
+    class Demo extends React.Component {
+        /*
+        * React.createRef()可返回一个专用的容器，该容器可存储被ref标识的节点
+        * */
+        myRef = React.createRef()
+
+        render() {
+            return (
+                <div>
+                    <input ref={this.myRef} type="text" placeholder="click to show"/>
+                    <button onClick={this.show}>click</button>
+                </div>
+            )
+        }
+
+        show = () => {
+            const {current} = this.myRef
+            alert(current.value)
+        }
+    }
+
+    ReactDOM.render(<Demo/>, document.getElementById('test'))
+</script>
+</body>
+</html>

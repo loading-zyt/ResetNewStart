@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ref_回调函数</title>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+    <script src="../js/prop-types.js"></script>
+</head>
+<body>
+<div id="test"></div>
+
+<script type="text/babel">
+    class Demo extends React.Component {
+
+        state = {isHot: true}
+
+        render() {
+            const {isHot} = this.state
+            return (
+                <div>
+                    <h2>{isHot ? 'hot' : 'cold'}</h2>
+                    <input ref={(currentNode) => {
+                        this.input1 = currentNode;
+                        console.log('@', currentNode)
+                    }} type="text" placeholder="点击按钮显示弹窗"/>&nbsp;
+                    <button onClick={this.showData}>点击</button>
+                    &nbsp;
+                    <input ref={this.saveInput} onBlur={this.showData2} type="text" placeholder="失去焦点显示弹窗"/>
+                    <button onClick={this.changeWeather}>changeWeather</button><br/>
+                    <input type="text" onBlur={this.showData3} placeholder="event.target"/>
+                </div>
+            )
+        }
+
+        saveInput = (c) => {
+            this.input2 = c;
+        }
+
+        showData = () => {
+            const {input1} = this
+            alert(input1.value)
+        }
+
+        showData2 = () => {
+            const {input2} = this
+            alert(input2.value)
+        }
+
+        showData3=(event)=>{
+            alert(event.target.value)
+        }
+
+        changeWeather = () => {
+            const {isHot} = this.state
+            this.setState({isHot: !isHot})
+        }
+    }
+
+    ReactDOM.render(<Demo/>, document.getElementById('test'))
+</script>
+</body>
+</html>
