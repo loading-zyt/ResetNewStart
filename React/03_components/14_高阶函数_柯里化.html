@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>高阶函数_柯里化</title>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+</head>
+<body>
+<div id="test"></div>
+<script type="text/babel">
+    class Login extends React.Component {
+
+        state = {
+            username: '',
+            password: ''
+        }
+
+        render() {
+            return (
+                <form onSubmit={this.solve}>
+                    <input onChange={this.saveData('username')} type="text" placeholder="username"/><br/>
+                    <input onChange={this.saveData('password')} type="password" placeholder="password"/><br/>
+                    <button>Login</button>
+                </form>)
+        }
+
+        solve = (event) => {
+            event.preventDefault()
+            const {username, password} = this.state
+            alert('username ' + {username} + ',password ' + {password})
+        }
+
+        saveData = (data) => {
+            return (event) => {
+                this.setState({[data]: event.target.value})
+            }
+        }
+    }
+
+    ReactDOM.render(<Login/>, document.getElementById('test'))
+</script>
+</body>
+</html>

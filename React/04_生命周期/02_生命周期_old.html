@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>生命周期_old</title>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+</head>
+<body>
+<div id="test"></div>
+<script type="text/babel">
+    class SumData extends React.Component {
+
+        constructor(props) {
+            console.log('SumData---constructor')
+            super(props);
+            this.state = {data: 0}
+        }
+
+        componentWillMount() {
+            console.log('SumData---componentWillMount')
+        }
+
+        render() {
+            console.log('SumData---render')
+            return (
+                <div>
+                    <h2>count:{this.state.data}</h2><br/>
+                    <button onClick={this.countAdd}>+1</button>
+                    <br/>
+                    <button onClick={this.unload}>unload</button>
+                    <br/>
+                    <button onClick={this.force}>forceUpdate</button>
+                </div>
+            )
+        }
+
+        componentDidMount() {
+            console.log('SumData---componentDidMount')
+        }
+
+        componentWillUnmount() {
+            console.log('SumData---componentWillUnmount')
+        }
+
+        shouldComponentUpdate() {
+            console.log('SumData---shouldComponentUpdate')
+            return true
+        }
+
+        componentWillUpdate() {
+            console.log('SumData---componentWillUpdate')
+        }
+
+        componentDidUpdate() {
+            console.log('SumData---componentDidUpdate')
+        }
+
+        countAdd = () => {
+            const {data} = this.state
+            this.setState({data: data + 1})
+        }
+
+        unload = () => {
+            ReactDOM.unmountComponentAtNode(document.getElementById('test'))
+        }
+
+        force = () => {
+            this.forceUpdate()
+        }
+    }
+
+    class A extends React.Component {
+
+        state = {carName: 'AAA'}
+
+        changeCar = () => {
+            this.setState({carName: 'BBB'})
+        }
+
+        render() {
+            console.log('A---render')
+            return (
+                <div>
+                    <h2>A</h2>
+                    <button onClick={this.changeCar}>change</button>
+                    <B carName={this.state.carName}/>
+                </div>
+            )
+        }
+    }
+
+    class B extends React.Component {
+        render() {
+            console.log('B---render')
+            return (
+                <div>
+                    <h2>B,{this.props.carName}</h2>
+                </div>
+            )
+        }
+
+        componentWillReceiveProps(){
+            console.log('B---componentWillReceiveProps')
+        }
+    }
+
+    ReactDOM.render(<A/>, document.getElementById('test'))
+</script>
+</body>
+</html>

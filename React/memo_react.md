@@ -61,3 +61,22 @@
    * React使用的是自定义事件，不是原生DOM事件
    * React中的事件是通过事件委托方式处理的(委托给组件最外层的元素)
 2. 通过event.target得到发生事件的DOM元素对象
+
+#### 高阶函数
+1. 若A函数接收的参数是一个函数，那么A就称为高阶函数
+2. 若A函数调用的返回值是一个函数，那么A就称为高阶函数
+
+#### 函数的柯里化
+    通过函数调用继续返回函数的方式，实现多次接收参数最后统一处理的函数编码形式。
+
+#### 生命周期
+* constructor---构造函数
+* componentWillMount---组件挂载前
+* render---初期化，更新state
+* componentDidMount---组件挂载完毕
+* componentWillUnmount---组件卸载前
+* componentDidUpdate---组件卸载完毕
+* shouldComponentUpdate---state更新时，判断是否要更新
+* componentWillUpdate---执行更新
+* componentWillReceiveProps---父组件render执行
+
