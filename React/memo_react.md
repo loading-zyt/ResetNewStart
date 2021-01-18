@@ -69,14 +69,19 @@
 #### 函数的柯里化
     通过函数调用继续返回函数的方式，实现多次接收参数最后统一处理的函数编码形式。
 
-#### 生命周期
+#### 生命周期(旧)
 * constructor---构造函数
-* componentWillMount---组件挂载前
+* componentWillMount---组件挂载前(将废弃UNSAFE_)
 * render---初期化，更新state
 * componentDidMount---组件挂载完毕
 * componentWillUnmount---组件卸载前
 * componentDidUpdate---组件卸载完毕
 * shouldComponentUpdate---state更新时，判断是否要更新
-* componentWillUpdate---执行更新
-* componentWillReceiveProps---父组件render执行
+* componentWillUpdate---执行更新(将废弃UNSAFE_)
+* componentWillReceiveProps---父组件render执行(将废弃UNSAFE_)
+#### ↑重要的勾子
+* render：初始化渲染或更新渲染调用
+* componentDidMount：开启监听，发送ajax请求
+* componentWillUnmount：做收尾工作
+
 
